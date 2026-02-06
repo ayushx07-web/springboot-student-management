@@ -5,44 +5,44 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.util.List;
 
 @Entity
-@Table(name = "students")
+@Table(name = "students_table")
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is required")
     private String name;
 
-
-    @Email(message = "Invalid email")
-    @NotBlank(message = "Email is required")
     private String email;
 
-    @NotBlank(message = "Course is required")
-    private String course;
+    @ElementCollection
+    @CollectionTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id")
+    )
+    @Column(name = "course")
+    private List<String> courses;
 
     // Constructors
-    public Student() {
-    }
+    public Student() {}
 
-    public Student(String name, String email, String course) {
+    public Student(String name, String email, List<String> courses) {
         this.name = name;
         this.email = email;
-        this.course = course;
+        this.courses = courses;
     }
 
     // Getters & Setters
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -61,11 +61,11 @@ public class Student {
         this.email = email;
     }
 
-    public String getCourse() {
-        return course;
+    public List<String> getCourses() {
+        return courses;
     }
 
-    public void setCourse(String course) {
-        this.course = course;
+    public void setCourses(List<String> courses) {
+        this.courses = courses;
     }
 }

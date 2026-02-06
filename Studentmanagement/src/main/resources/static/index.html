@@ -1,42 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Student Management</title>
+    <meta charset="UTF-8">
+    <title>Student Admin Panel</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Student Management System</h2>
+<div class="app">
 
-<div class="form-box">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <h2>🎓 Admin</h2>
 
-    <input type="text" id="name" placeholder="Name">
-    <input type="email" id="email" placeholder="Email">
-    <input type="text" id="course" placeholder="Course">
+        <ul>
+            <li class="active">Students</li>
+            <li>Courses</li>
+            <li>Reports</li>
+            <li>Settings</li>
+        </ul>
+    </div>
 
-    <button onclick="addStudent()">Add Student</button>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- TOP BAR -->
+        <div class="topbar">
+
+            <input
+                    type="text"
+                    id="searchBox"
+                    placeholder="🔍 Search..."
+                    onkeyup="searchStudents()"
+            >
+
+            <button onclick="openModal()">➕ Add Student</button>
+
+        </div>
+
+
+        <!-- TABLE -->
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Courses</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody id="studentTable">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+            <button onclick="prevPage()">⬅ Prev</button>
+            <span id="pageNum">1</span>
+            <button onclick="nextPage()">Next ➡</button>
+        </div>
+
+
+    </div>
 </div>
 
-<h3>Student List</h3>
-
-<input type="text" id="search" placeholder="Search by name"
-       onkeyup="searchStudent()"
-       style="margin-bottom:15px; padding:8px; width:200px;">
 
 
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Course</th>
-        <th>Action</th>
-    </tr>
-    </thead>
+<!-- MODAL -->
+<div id="studentModal" class="modal">
 
-    <tbody id="studentTable"></tbody>
-</table>
+    <div class="modal-content">
+
+        <h3 id="modalTitle">Add Student</h3>
+
+        <input type="hidden" id="studentId">
+
+        <input id="name" placeholder="Name">
+        <input id="email" placeholder="Email">
+        <input id="course" placeholder="Courses (comma separated)">
+
+        <div class="modal-actions">
+
+            <button onclick="saveStudent()">Save</button>
+            <button class="cancel" onclick="closeModal()">Cancel</button>
+
+        </div>
+
+    </div>
+</div>
+
+
 
 <script src="script.js"></script>
 </body>
