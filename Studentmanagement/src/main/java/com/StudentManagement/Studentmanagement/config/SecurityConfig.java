@@ -53,7 +53,7 @@ public class SecurityConfig {
     }
 
 
-    // ✅ ADMIN USER
+    //  ADMIN USER
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
 
