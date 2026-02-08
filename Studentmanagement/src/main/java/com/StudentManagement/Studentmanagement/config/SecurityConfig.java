@@ -8,32 +8,23 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 
 @Configuration
 public class SecurityConfig {
 
-    // PASSWORD ENCODER
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
-
-    // USER
+    // LOGIN USER
     @Bean
     public UserDetailsService userDetailsService() {
 
         UserDetails admin = User.withUsername("admin")
-                .password("admin123")
+                .password("{noop}admin123") // dev only
                 .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(admin);
     }
 
-    // SECURITY
+    // SECURITY RULES
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -41,15 +32,20 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
+
+                        // ✅ ALLOW STATIC FILES
                         .requestMatchers(
                                 "/login.html",
                                 "/index.html",
-                                "/",
+                                "/style.css",
+                                "/script.js",
+                                "/login.js",
                                 "/**/*.css",
                                 "/**/*.js",
-                                "/**/*.png",
-                                "/**/*.jpg"
+                                "/images/**"
                         ).permitAll()
+
+                        // Everything else needs login
                         .anyRequest().authenticated()
                 )
 
@@ -62,7 +58,6 @@ public class SecurityConfig {
                 )
 
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/login.html")
                 );
 

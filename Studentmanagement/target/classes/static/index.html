@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Admin Panel</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/style.css">
+
+    <!-- JS -->
     <script src="/script.js" defer></script>
-
-
 </head>
 
 <body>
@@ -15,6 +17,7 @@
 
     <!-- SIDEBAR -->
     <div class="sidebar">
+
         <h2>🎓 Admin</h2>
 
         <ul>
@@ -23,6 +26,7 @@
             <li>Reports</li>
             <li>Settings</li>
         </ul>
+
     </div>
 
 
@@ -60,6 +64,7 @@
                 </thead>
 
                 <tbody id="studentTable">
+                <!-- Data loaded by JS -->
                 </tbody>
 
             </table>
@@ -69,15 +74,19 @@
 
         <!-- PAGINATION -->
         <div class="pagination">
+
             <button onclick="prevPage()">⬅ Prev</button>
+
             <span id="pageNum">1</span>
+
             <button onclick="nextPage()">Next ➡</button>
+
         </div>
 
 
     </div>
-</div>
 
+</div>
 
 
 <!-- MODAL -->
@@ -96,15 +105,14 @@
         <div class="modal-actions">
 
             <button onclick="saveStudent()">Save</button>
+
             <button class="cancel" onclick="closeModal()">Cancel</button>
 
         </div>
 
     </div>
+
 </div>
-
-
-
 
 </body>
 </html>

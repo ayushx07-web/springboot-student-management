@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Login</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/style.css">
-    <script src="/script.js" defer></script>
 
-
+    <!-- JS -->
+    <script src="/login.js" defer></script>
 
     <style>
 
@@ -20,7 +22,6 @@
 
             font-family: Arial, sans-serif;
 
-            /* Soft background */
             background: linear-gradient(135deg, #1f2933, #111827);
         }
 
@@ -101,7 +102,7 @@
 
     <h2>Admin Login</h2>
 
-    <!-- IMPORTANT: Spring Security Form -->
+    <!-- Spring Security Login -->
     <form method="post" action="/login">
 
         <input
@@ -121,12 +122,7 @@
         <button type="submit">Login</button>
 
         <!-- Error Message -->
-        <div class="error">
-            <div class="error" id="errorMsg"></div>
-
-            Invalid username or password
-            </span>
-        </div>
+        <div class="error" id="errorMsg"></div>
 
     </form>
 
@@ -140,7 +136,6 @@
             "Invalid username or password";
     }
 </script>
-
 
 </body>
 </html>
