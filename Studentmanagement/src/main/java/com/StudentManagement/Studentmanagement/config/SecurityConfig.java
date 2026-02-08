@@ -12,57 +12,40 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+
+        UserDetails admin = User
+                .withUsername("admin")
+                .password("{noop}admin123") // no encryption (dev only)
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(admin);
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-
-                        // Allow login page + static files
-                        .requestMatchers(
-                                "/login.html",
-                                "/css/**",
-                                "/js/**",
-                                "/images/**"
-                        ).permitAll()
-
-                        // Everything else needs login
+                        .requestMatchers("/login.html", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
 
                 .formLogin(form -> form
-
                         .loginPage("/login.html")
-
                         .loginProcessingUrl("/login")
-
                         .defaultSuccessUrl("/index.html", true)
-
                         .failureUrl("/login.html?error=true")
-
                         .permitAll()
                 )
 
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/login.html")
                 );
 
         return http.build();
-    }
-
-
-    //  ADMIN USER
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-
-        UserDetails admin = User
-                .withUsername("admin")
-                .password("{noop}admin123")   // no encryption (for dev only)
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin);
     }
 }
