@@ -6,7 +6,7 @@ This application allows users to manage student records with CRUD operations.
 ---
 
 ## 🚀 Live Demo
-🔗 Coming Soon (Deployed on Cloud Platform)
+🔗 https://student-management-ymib.onrender.com/
 
 ---
 
@@ -20,7 +20,7 @@ This application allows users to manage student records with CRUD operations.
 ✅ REST API support  
 ✅ Database integration (MySQL)  
 ✅ Docker support  
-✅ Cloud deployment ready  
+✅ Cloud deployment ready(Render)  
 
 ---
 
@@ -33,7 +33,7 @@ This application allows users to manage student records with CRUD operations.
 | Database    | MySQL |
 | ORM         | Hibernate / JPA |
 | Build Tool  | Maven |
-| Deployment  | Docker, Railway / Render |
+| Deployment  | Docker ,Render |
 | Versioning  | Git & GitHub |
 
 ---
