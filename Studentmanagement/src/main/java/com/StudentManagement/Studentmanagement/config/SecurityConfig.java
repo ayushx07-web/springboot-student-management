@@ -32,7 +32,14 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login.html", "/css/**", "/js/**").permitAll()
+                        .requestMatchers(
+                                "/login.html",
+                                "/index.html",
+                                "/",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
 
@@ -45,9 +52,12 @@ public class SecurityConfig {
                 )
 
                 .logout(logout -> logout
+                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/login.html")
                 );
 
         return http.build();
     }
+
 }
+
