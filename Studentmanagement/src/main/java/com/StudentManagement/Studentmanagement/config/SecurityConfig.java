@@ -8,23 +8,32 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @Configuration
 public class SecurityConfig {
 
-    // LOGIN USER
+    // PASSWORD ENCODER
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    // USER
     @Bean
     public UserDetailsService userDetailsService() {
 
         UserDetails admin = User.withUsername("admin")
-                .password("{noop}admin123") // no encryption (dev only)
+                .password("admin123")
                 .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(admin);
     }
 
-    // SECURITY RULES
+    // SECURITY
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -36,9 +45,10 @@ public class SecurityConfig {
                                 "/login.html",
                                 "/index.html",
                                 "/",
-                                "/css/**",
-                                "/js/**",
-                                "/images/**"
+                                "/**/*.css",
+                                "/**/*.js",
+                                "/**/*.png",
+                                "/**/*.jpg"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -58,6 +68,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 }
-
