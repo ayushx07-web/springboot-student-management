@@ -4,24 +4,16 @@
     <meta charset="UTF-8">
     <title>Admin Login</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="/style.css">
 
-    <!-- JS -->
-    <script src="/login.js" defer></script>
-
     <style>
-
         body {
             margin: 0;
             height: 100vh;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             font-family: Arial, sans-serif;
-
             background: linear-gradient(135deg, #1f2933, #111827);
         }
 
@@ -29,68 +21,34 @@
             background: #ffffff;
             width: 350px;
             padding: 35px;
-
             border-radius: 12px;
-
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-
             text-align: center;
-        }
-
-        .icon {
-            font-size: 45px;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            color: #1f2933;
         }
 
         input {
             width: 100%;
             padding: 12px;
-
             margin: 10px 0;
-
             border: 1px solid #ccc;
             border-radius: 6px;
-
-            font-size: 15px;
-            outline: none;
-        }
-
-        input:focus {
-            border-color: #2563eb;
         }
 
         button {
             width: 100%;
             padding: 12px;
-
             margin-top: 15px;
-
             background: #2563eb;
             color: white;
-
             border: none;
             border-radius: 6px;
-
-            font-size: 16px;
-
             cursor: pointer;
-        }
-
-        button:hover {
-            background: #1d4ed8;
         }
 
         .error {
             color: red;
-            margin-top: 12px;
-            font-size: 14px;
+            margin-top: 10px;
         }
-
     </style>
 </head>
 
@@ -98,30 +56,22 @@
 
 <div class="login-box">
 
-    <div class="icon">🔐</div>
-
     <h2>Admin Login</h2>
 
-    <!-- Spring Security Login -->
     <form method="post" action="/login">
 
-        <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                required
-        >
+        <input type="text"
+               name="username"
+               placeholder="Username"
+               required>
 
-        <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                required
-        >
+        <input type="password"
+               name="password"
+               placeholder="Password"
+               required>
 
         <button type="submit">Login</button>
 
-        <!-- Error Message -->
         <div class="error" id="errorMsg"></div>
 
     </form>
