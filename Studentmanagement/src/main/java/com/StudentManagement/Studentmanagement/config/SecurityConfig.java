@@ -12,7 +12,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    // ADMIN USER
     @Bean
     public UserDetailsService userDetailsService() {
 
@@ -24,7 +23,6 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(admin);
     }
 
-    // SECURITY CONFIG
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -33,16 +31,25 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-                        // Allow static files + login
+                        // ✅ Allow ALL static files
                         .requestMatchers(
+                                "/",
                                 "/login.html",
                                 "/login",
+                                "/index.html",
+
+                                "/css/**",
+                                "/js/**",
+
                                 "/style.css",
                                 "/script.js",
-                                "/login.js"
+                                "/login.js",
+
+                                "/**/*.css",
+                                "/**/*.js"
                         ).permitAll()
 
-                        // Protect everything else
+                        // Everything else needs login
                         .anyRequest().authenticated()
                 )
 
@@ -50,7 +57,7 @@ public class SecurityConfig {
                         .loginPage("/login.html")
                         .loginProcessingUrl("/login")
 
-                        // IMPORTANT
+                        // ✅ Redirect to home
                         .defaultSuccessUrl("/", true)
 
                         .failureUrl("/login.html?error=true")
@@ -58,7 +65,6 @@ public class SecurityConfig {
                 )
 
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
                         .logoutSuccessUrl("/login.html")
                 );
 
